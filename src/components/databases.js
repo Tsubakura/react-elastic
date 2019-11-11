@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import es from 'elasticsearch'
 const client = new es.Client({
-    host: 'http://192.168.0.117:9200' //<- Change URL 
+    host: 'http://localhost:9200' //<- Change URL if needed
 })
 
 const listIndexes = () => new Promise((resolve, reject) => setTimeout(async () => {

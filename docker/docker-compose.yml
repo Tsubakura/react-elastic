@@ -1,0 +1,45 @@
+version: "3"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.4.0
+    container_name: elastic-0
+    environment:
+      - node.name=elastic-0
+      - cluster.name=test-cluster
+      - cluster.initial_master_nodes=elastic-0
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms15g -Xmx15g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data00:/usr/share/elasticsearch/data
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - elastic
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana-oss:7.4.0
+    environment:
+      - SERVER_NAME="kibana"
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - LOGGING_SILENT=true
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+
+volumes:
+  data00:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge
