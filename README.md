@@ -1,3 +1,4 @@
+# React-Elastic
 This project is made purely to test the interactions between a React website and an ElasticSearch database. Keep in mind that this documentation assumes you're running either Linux Ubuntu or Debian. If you're using something else, tough luck.
 
 ## React
