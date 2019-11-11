@@ -19,8 +19,9 @@ npm start
 * docker-compose
 
 ### Instructions
-Navigate to the docker folder and run the following command:
+Navigate to the docker folder and run the following commands:
 ```
+sudo sysctl -w vm.max_map_count=262144
 sudo docker-compose up -d
 ```
 **WARNING**: Make sure that the elasticsearch.yml and docker-compose.yml files are both in the same folder when executing the above command!
