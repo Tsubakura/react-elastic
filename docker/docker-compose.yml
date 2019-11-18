@@ -35,11 +35,28 @@ services:
       - elasticsearch
     networks:
       - elastic
+      
+  db:
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: minor-g3
+    ports:
+      - 3306:3306
+    volumes: 
+      - db00:/usr/lib/mysql
+    network:
+      - database
 
 volumes:
   data00:
     driver: local
+  db00:
+    driver: local
 
 networks:
   elastic:
+    driver: bridge
+  database:
     driver: bridge
