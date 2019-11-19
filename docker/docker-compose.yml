@@ -46,17 +46,31 @@ services:
       - 3306:3306
     volumes: 
       - db00:/usr/lib/mysql
-    network:
+    networks:
       - database
+      
+  portainer:
+    container_name: portainer
+    image: portainer/portainer
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 
 volumes:
   data00:
     driver: local
   db00:
     driver: local
+  portainer_data:
+    driver: local
 
 networks:
   elastic:
     driver: bridge
   database:
+    driver: bridge
+  portainer:
     driver: bridge
